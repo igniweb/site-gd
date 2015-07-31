@@ -22,23 +22,36 @@ class Handler extends ExceptionHandler
      *
      * This is a great spot to send exceptions to Sentry, Bugsnag, etc.
      *
-     * @param  \Exception  $e
+     * @param \Exception $e
      * @return void
      */
     public function report(Exception $e)
     {
+        /*
+        if ($e instanceof AuthException) {
+            app('mailer')->raw($e->getMessage(), function ($message) {
+                $message->to(env('MAIL_FROM_ADDRESS'));
+                $message->subject('Auth exception');
+            });
+        }
+        */
+
         return parent::report($e);
     }
 
     /**
      * Render an exception into an HTTP response.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Exception  $e
+     * @param \Illuminate\Http\Request $request
+     * @param \Exception $e
      * @return \Illuminate\Http\Response
      */
     public function render($request, Exception $e)
     {
+        if ($e instanceof AuthException) {
+            return view('errors.403');
+        }
+
         return parent::render($request, $e);
     }
 }

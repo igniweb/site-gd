@@ -1,21 +1,18 @@
-## Lumen PHP Framework
+## Guillaume Dufrenne
 
-[![Build Status](https://travis-ci.org/laravel/lumen-framework.svg)](https://travis-ci.org/laravel/lumen-framework)
-[![Total Downloads](https://poser.pugx.org/laravel/lumen-framework/d/total.svg)](https://packagist.org/packages/laravel/lumen-framework)
-[![Latest Stable Version](https://poser.pugx.org/laravel/lumen-framework/v/stable.svg)](https://packagist.org/packages/laravel/lumen-framework)
-[![Latest Unstable Version](https://poser.pugx.org/laravel/lumen-framework/v/unstable.svg)](https://packagist.org/packages/laravel/lumen-framework)
-[![License](https://poser.pugx.org/laravel/lumen-framework/license.svg)](https://packagist.org/packages/laravel/lumen-framework)
+### Install
 
-Laravel Lumen is a stunningly fast PHP micro-framework for building web applications with expressive, elegant syntax. We believe development must be an enjoyable, creative experience to be truly fulfilling. Lumen attempts to take the pain out of development by easing common tasks used in the majority of web projects, such as routing, database abstraction, queueing, and caching.
+ * `chmod -R 0777 storage`
+ * `composer install`
+ * `php artisan serve`
+ * Setup `.env` file to match local configuration
+ * Visit http://localhost:8000
 
-## Official Documentation
+### cURL error
 
-Documentation for the framework can be found on the [Lumen website](http://lumen.laravel.com/docs).
+If encounting "cURL error 60: SSL certificate problem: unable to get local issuer certificate (see http://curl.haxx.se/libcurl/c/libcurl-errors.html)"
 
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell at taylor@laravel.com. All security vulnerabilities will be promptly addressed.
-
-### License
-
-The Lumen framework is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT)
+ * Download from https://gist.github.com/VersatilityWerks/5719158/download
+ * Unzip
+ * Copy to `~/.ssh/cacert.pem`
+ * Edit php.ini to `curl.cainfo = /path-to/.ssh/cacert.pem`
