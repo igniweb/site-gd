@@ -1,6 +1,8 @@
 <?php
 
-$app->get('/', function () use ($app) {
+$app->get('/', ['as' => 'home', 'uses' => 'HomeController@index']);
+
+$app->get('sandbox', function () use ($app) {
     //dd($app);
     //dd(app()->environment());
 
@@ -13,6 +15,4 @@ $app->get('/', function () use ($app) {
     //app('log')->alert('Alert');
     
     //throw new App\Exceptions\AuthException('Invalid user credentials.');
-
-    return $app->welcome();
 });
