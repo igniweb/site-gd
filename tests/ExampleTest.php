@@ -3,12 +3,23 @@
 class ExampleTest extends TestCase
 {
     /**
-     * A basic test example.
+     * Test homepage.
      *
      * @return void
      */
-    public function testBasicExample()
+    public function testHomePage()
     {
-        $this->visit('/')->see('Lumen.');
+        $this->visit('/')->see('Sandbox');
+    }
+
+    /**
+     * Test model factories.
+     *
+     * @return void
+     */
+    public function testModelFactories()
+    {
+        $user = factory('App\Models\User')->make();
+        var_dump($user->toArray());
     }
 }
