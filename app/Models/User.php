@@ -31,6 +31,13 @@ class User extends Model
     protected $fillable = ['role', 'email', 'password', 'first_name', 'last_name'];
 
     /**
+     * The attributes that should be hidden for arrays.
+     *
+     * @var array
+     */
+    protected $hidden = ['password'];
+
+    /**
      * The attributes that should be mutated to dates.
      *
      * @var array
@@ -55,5 +62,15 @@ class User extends Model
     public function scopeAdmin($query)
     {
         return $query->where('role', '=', 'admin');
+    }
+
+    /**
+     * Returns key-label roles.
+     *
+     * @return array
+     */
+    public static function roles()
+    {
+        return trans('app.roles');
     }
 }
