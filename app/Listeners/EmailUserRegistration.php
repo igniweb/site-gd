@@ -23,11 +23,11 @@ class EmailUserRegistration implements ShouldQueue
     /**
      * Handle the event.
      *
-     * @param UserWasRegistered $event
+     * @param \App\Events\UserWasRegistered $event
      * @return void
      */
     public function handle(UserWasRegistered $event)
     {
-        dd($event->user);
+        throw new \Exception(print_r($event->user, true));
     }
 }
