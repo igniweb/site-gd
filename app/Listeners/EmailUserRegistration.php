@@ -28,6 +28,10 @@ class EmailUserRegistration implements ShouldQueue
      */
     public function handle(UserWasRegistered $event)
     {
-        throw new \Exception(print_r($event->user, true));
+        app('mailer')->raw(print_r($event->user, true), function ($message) {
+            $message->to(env('MAIL_FROM_ADDRESS'));
+            $message->subject('EmailUserRegistration');
+        });
+        //throw new \Exception(print_r($event->user, true));
     }
 }
