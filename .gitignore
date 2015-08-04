@@ -1,2 +1,7 @@
+/node_modules
+/public/assets/vendor
+/public/dist
 /vendor
+.DS_Store
 .env
+npm-debug.log

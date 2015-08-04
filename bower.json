@@ -1,0 +1,6 @@
+{
+    "name": "igniweb_site-gd",
+    "devDependencies": {
+        "semantic-ui": "~2.0.7"
+    }
+}

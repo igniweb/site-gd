@@ -1,0 +1,17 @@
+{
+    "paths": {
+        "src": "public/assets/src/",
+        "dist": "public/dist/"
+    },
+    "scripts": [
+        "public/assets/vendor/jquery/dist/jquery.js",
+        "public/assets/vendor/semantic-ui/dist/semantic.js",
+        "public/assets/src/js/app.js"
+    ],
+    "styles": [
+        "public/assets/vendor/semantic-ui/dist/semantic.css"
+    ],
+    "medias": [
+        "public/assets/vendor/semantic-ui/dist/themes/"
+    ]
+}

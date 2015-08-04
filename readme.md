@@ -2,10 +2,13 @@
 
 ### Install
 
- * `chmod -R 0777 storage`
- * `composer install`
- * `php artisan serve`
  * Setup `.env` file to match local configuration
+ * `bower install`
+ * `npm install`
+ * `gulp`
+ * `composer install`
+ * `chmod -R 0777 storage`
+ * `php artisan serve`
  * Visit http://localhost:8000
 
 ### cURL error

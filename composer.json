@@ -1,7 +1,5 @@
 {
-    "name": "laravel/lumen",
-    "description": "The Laravel Lumen Framework.",
-    "keywords": ["framework", "laravel", "lumen"],
+    "name": "igniweb_site-gd",
     "license": "MIT",
     "type": "project",
     "require": {
