@@ -20,7 +20,7 @@ gulp.task('clean', ['lint'], function (callback) {
 gulp.task('copy', ['clean'], function () {
     for (var i = 0 ; i < assets.medias.length ; i++) {
         gulp.src(assets.medias[i] + '/**/*')
-            .pipe(gulp.dest(assets.paths.dist + lastSegments(assets.medias[i])));
+            .pipe(gulp.dest(assets.paths.dist + lastSegment(assets.medias[i])));
     }
 });
 
@@ -61,7 +61,7 @@ function appScripts(scripts) {
     return appScripts;
 }
 
-function lastSegments(path) {
+function lastSegment(path) {
     path = path.replace(/\/$/, '');
     var segments = path.split('/');
 
