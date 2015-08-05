@@ -9,7 +9,8 @@
         "public/assets/src/js/app.js"
     ],
     "styles": [
-        "public/assets/vendor/semantic-ui/dist/semantic.css"
+        "public/assets/vendor/semantic-ui/dist/semantic.css",
+        "public/assets/src/css/admin.css"
     ],
     "medias": [
         "public/assets/vendor/semantic-ui/dist/themes/"

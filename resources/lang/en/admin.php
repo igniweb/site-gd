@@ -2,6 +2,6 @@
 
 return [
 
-    'title' => "Guillaume Dufrenne",
+    'title' => 'Guillaume Dufrenne',
 
 ];

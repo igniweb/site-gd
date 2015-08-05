@@ -6,8 +6,13 @@
     {!! app('assets')->styles() !!}
 </head>
 <body>
-    @yield('main')
+    @include('layouts.backend._menu')
+    <div class="ui container">
+        @yield('main')
+    </div>
     {!! app('assets')->scripts() !!}
-    @yield('scripts')
+    <script>
+        @yield('scripts')
+    </script>
 </body>
 </html>

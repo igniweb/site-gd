@@ -1,0 +1,22 @@
+#example .sidebar.menu .logo.image,
+#example .sticky.menu .logo.image {
+  width: 35px;
+  margin-right: 1em;
+}
+
+#example #toc > :last-child {
+  padding-bottom: 2em;
+}
+
+/* Incomplete Label */
+#example #toc .item .circular.label {
+  position: absolute;
+  top: 0.75rem;
+  right: 1em;
+  opacity: 0.2;
+  transition: background 0.3s ease;
+}
+#example #toc .item.active > .circular.label,
+#example #toc .item:hover > .circular.label {
+  opacity: 0.8;
+}

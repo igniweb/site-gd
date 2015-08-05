@@ -3,9 +3,9 @@
 return [
 
     'roles' => [
-        'super_admin' => "Super-Administrateur",
-        'admin'       => "Administrateur",
-        'user'        => "Utilisateur",
+        'super_admin' => 'Super-Administrateur',
+        'admin'       => 'Administrateur',
+        'user'        => 'Utilisateur',
     ],
 
 ];
