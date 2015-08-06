@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Services\Assets;
+use App\Services\Search\SearchEngine;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -16,6 +17,9 @@ class AppServiceProvider extends ServiceProvider
     {
         $this->app->singleton('assets', function ($app) {
             return new Assets;
+        });
+        $this->app->singleton('search.engine', function ($app) {
+            return new SearchEngine;
         });
     }
 }

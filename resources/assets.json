@@ -6,10 +6,15 @@
     "scripts": [
         "public/assets/vendor/jquery/dist/jquery.js",
         "public/assets/vendor/semantic-ui/dist/semantic.js",
-        "public/assets/src/js/app.js"
+        "public/assets/vendor/select2/dist/js/select2.js",
+        "public/assets/vendor/select2/dist/js/i18n/fr.js",
+        "public/assets/src/js/app.js",
+        "public/assets/src/js/app.search.js",
+        "public/assets/src/js/run.js"
     ],
     "styles": [
         "public/assets/vendor/semantic-ui/dist/semantic.css",
+        "public/assets/vendor/select2/dist/css/select2.css",
         "public/assets/src/css/admin.css"
     ],
     "medias": [

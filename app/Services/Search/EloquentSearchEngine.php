@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Services;
+namespace App\Services\Search;
 
-trait SearchEngine
+trait EloquentSearchEngine
 {
     /**
      * Returns collection matching specified $q parameter.
@@ -27,16 +27,6 @@ trait SearchEngine
         $orderBy = $orderBy ?: $this->primaryKey;
 
         return $query->orderBy($orderBy, $orderType)->get();
-    }
-
-    /**
-     * Renders model as a search result HTML formatted string.
-     *
-     * @return string
-     */
-    public function renderSearchResult()
-    {
-        return print_r($this->toArray(), true);
     }
 
     /**
