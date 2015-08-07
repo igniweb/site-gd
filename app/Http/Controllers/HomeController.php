@@ -26,11 +26,12 @@ class HomeController extends Controller
     public function search(Request $request)
     {
         $q = $request->get('q');
+        $isAjax = $request->ajax();
 
-        $results = app('search.engine')->search($q);
+        $results = app('search.engine')->search($q, $isAjax);
 
         $data = compact('q', 'results');
-        if ($request->ajax()) {
+        if ($isAjax) {
             return response()->json($data);
         } else {
             return view('home.search', $data);

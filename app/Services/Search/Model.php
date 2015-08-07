@@ -2,7 +2,7 @@
 
 namespace App\Services\Search;
 
-trait EloquentSearchEngine
+trait Model
 {
     /**
      * Returns collection matching specified $q parameter.

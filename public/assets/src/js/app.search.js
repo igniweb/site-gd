@@ -22,7 +22,15 @@
                         page: params.page
                     };
                 },
+                processResults: function (data, page) {
+                    return {
+                        results: data.results
+                    };
+                },
                 cache: true
+            },
+            escapeMarkup: function (markup) {
+                return markup;
             },
             language: 'fr',
             minimumInputLength: 3,
@@ -30,14 +38,13 @@
             templateSelection: _templateSelection
         });
     }
-    
-    function _templateResult(user) {
-        return user.first_name + ' ' + user.last_name;
+
+    function _templateResult(result) {
+        return result.templateResult;
     }
 
-    function _templateSelection(user) {
-        return '';
-        return user.first_name + ' ' + user.last_name;
+    function _templateSelection(result) {
+        return result.templateSelection;
     }
 
     // --------------------------------------------------------------------------------------------

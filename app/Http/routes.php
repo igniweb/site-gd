@@ -3,7 +3,14 @@
 $app->get('/', ['as' => 'home', 'uses' => 'HomeController@index']);
 $app->get('search', ['as' => 'search', 'uses' => 'HomeController@search']);
 
+$app->group(['prefix' => 'admin'], function ($app) {
+    $app->get('user/{id}', ['as' => 'admin.user.edit', 'uses' => 'Admin\UserController@edit']);
+});
+
 $app->get('sandbox', function () use ($app) {
+    //$user = app('App\Repositories\Contracts\UserRepository')->byId(1);
+    //dd($user);
+
     //dd($app);
     //dd(app()->environment());
 

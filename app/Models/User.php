@@ -2,13 +2,13 @@
 
 namespace App\Models;
 
-use App\Services\Search\EloquentSearchEngine;
+use App\Services\Search\Model as SearchEngine;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class User extends Model
 {
-    use EloquentSearchEngine;
+    use SearchEngine;
     use SoftDeletes;
 
     /**
