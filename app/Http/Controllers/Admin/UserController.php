@@ -44,7 +44,9 @@ class UserController extends Controller
      */
     public function dataTable(Request $request)
     {
-        return response()->json($data);
+        $input = $request->all();
+
+        return response()->json($this->users->dataTable($input));
     }
 
     /**

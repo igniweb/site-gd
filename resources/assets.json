@@ -9,8 +9,10 @@
         "public/assets/vendor/select2/dist/js/select2.js",
         "public/assets/vendor/select2/dist/js/i18n/fr.js",
         "public/assets/vendor/datatables/media/js/jquery.dataTables.js",
+        "public/assets/src/js/dataTables.semantic-ui.js",
         "public/assets/src/js/app.js",
         "public/assets/src/js/app.search.js",
+        "public/assets/src/js/app.datatable.js",
         "public/assets/src/js/run.js"
     ],
     "styles": [

@@ -4,12 +4,12 @@
 
     // Run modules
     app.module(
-        'search'
+        'search',
+        'datatables'
     );
 
     // Run application onReady
     //app.ready(function () {
     //});
-
 
 })(App, jQuery);

@@ -2,12 +2,14 @@
 
 namespace App\Models;
 
+use App\Services\Datatable\Model as Datatable;
 use App\Services\Search\Model as SearchEngine;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class User extends Model
 {
+    use Datatable;
     use SearchEngine;
     use SoftDeletes;
 

@@ -9,7 +9,7 @@
             {{ trans('admin.menu.users') }}
             <i class="dropdown icon"></i>
             <div class="menu">
-                <a class="item">
+                <a href="{{ route('admin.user.index') }}" class="item">
                     <i class="list icon"></i>
                     {{ trans('admin.actions.list') }}
                 </a>
