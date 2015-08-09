@@ -3,7 +3,6 @@
 namespace App\Services\Datatable;
 
 use DB, StdClass;
-use Illuminate\Database\Eloquent\Model;
 
 trait Model
 {
