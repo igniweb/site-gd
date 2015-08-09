@@ -21,7 +21,7 @@
         </div>
         <div class="right item">
             <div class="ui input">
-                <select id="search" data-placeholder="{{ trans('admin.menu.search') }}"></select>
+                <select id="search"></select>
             </div>
         </div>
     </div>

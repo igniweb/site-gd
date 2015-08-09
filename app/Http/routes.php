@@ -3,8 +3,10 @@
 $app->get('/', ['as' => 'home', 'uses' => 'HomeController@index']);
 $app->get('search', ['as' => 'search', 'uses' => 'HomeController@search']);
 
-$app->group(['prefix' => 'admin'], function ($app) {
-    $app->get('user/{id}', ['as' => 'admin.user.edit', 'uses' => 'Admin\UserController@edit']);
+$app->group(['prefix' => 'admin', 'namespace' => 'App\Http\Controllers\Admin'], function ($app) {
+    $app->get('user', ['as' => 'admin.user.index', 'uses' => 'UserController@index']);
+    $app->get('user/datatable', ['as' => 'admin.user.datatable', 'uses' => 'UserController@dataTable']);
+    $app->get('user/{id}', ['as' => 'admin.user.edit', 'uses' => 'UserController@edit']);
 });
 
 $app->get('sandbox', function () use ($app) {

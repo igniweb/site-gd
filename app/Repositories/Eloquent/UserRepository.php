@@ -54,9 +54,16 @@ class UserRepository implements UserContract, SearchRepository
 
         $results = $this->searchResults($q);
         foreach ($results as $result) {
+            $view = [
+                'link' => route('admin.user.edit', ['id' => $result->id]),
+                'image' => app('gravatar')->get($result->email, 48),
+                'header' => $result->first_name . ' ' . $result->last_name,
+                'extra' => trans('app.roles.' . $result->role),
+            ];
+
             $data[] = [
-                //'id' => route('admin.user.edit', ['id' => $result->id]),
-                'templateResult' => $result->first_name . ' ' . $result->last_name . ' <a href="' . route('admin.user.edit', ['id' => $result->id]) . '"><i class="icon edit"></i></a>',
+                //'id' => '',
+                'templateResult' => view('layouts.backend._search_result', $view)->render(),
                 'templateSelection' => $result->first_name . ' ' . $result->last_name,
             ];
         }

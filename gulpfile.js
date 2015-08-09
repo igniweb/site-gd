@@ -5,6 +5,7 @@ var jshint = require('gulp-jshint');
 var minify = require('gulp-minify-css');
 //var notify = require('gulp-notify');
 //var rename = require('gulp-rename');
+var replace = require('gulp-replace');
 var rimraf = require('rimraf');
 var uglify = require('gulp-uglify');
 var assets = require('./resources/assets.json');
@@ -33,6 +34,7 @@ gulp.task('lint', function () {
 gulp.task('minify', ['clean'], function () {
     // Options: https://www.npmjs.com/package/clean-css
     gulp.src(assets.styles)
+        .pipe(replace('../images/', './images/'))
         .pipe(concat('styles.min.css'))
         .pipe(minify({ keepSpecialComments: 0, processImport: false }))
         .pipe(gulp.dest(assets.paths.dist));
