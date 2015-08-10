@@ -4,11 +4,11 @@ namespace App\Repositories\Eloquent;
 
 use App\Models\User;
 use App\Repositories\Contracts\UserRepository as UserContract;
-use App\Services\Datatable\Repository as DatatableRepository;
-use App\Services\Search\Repository as SearchRepository;
+use App\Services\Datatable\Contracts\Repository as DatatableContract;
+use App\Services\Search\Contracts\Repository as SearchContract;
 use App\Services\Search\SearchEngine;
 
-class UserRepository implements UserContract, DatatableRepository, SearchRepository
+class UserRepository implements UserContract, DatatableContract, SearchContract
 {
     /**
      * Returns key-label roles.

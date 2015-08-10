@@ -13,8 +13,8 @@
         <tr>
             <th class="sorted ascending">{{ trans('app.user.id') }}</th>
             <th>{{ trans('admin.user.name') }}</th>
-            <th>{{ trans('app.user.role') }}</th>
             <th>{{ trans('app.user.email') }}</th>
+            <th>{{ trans('app.user.role') }}</th>
             <th>{{ trans('admin.actions.label') }}</th>
         </tr>
     </thead>

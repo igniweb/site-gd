@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Services\Datatable;
+namespace App\Services\Datatable\Contracts;
 
 interface Repository
 {
