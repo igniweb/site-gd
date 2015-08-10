@@ -21,6 +21,22 @@ class UserRepository implements DatatableContract, SearchContract, UserContract
     }
 
     /**
+     * Returns new empty User instance.
+     *
+     * @return array
+     */
+    public function newInstance()
+    {
+        $instance = ['id' => null];
+        
+        foreach ((new User)->getFillable() as $fillable) {
+            $instance[$fillable] = null;
+        }
+
+        return $instance;
+    }
+
+    /**
      * Returns user data matching specified ID.
      *
      * @param int $id
@@ -35,6 +51,64 @@ class UserRepository implements DatatableContract, SearchContract, UserContract
         }
 
         return $user->toArray();
+    }
+
+    /**
+     * Create new User instance.
+     *
+     * @param array $input
+     * @return array
+     */
+    public function create($input)
+    {
+        $input = $this->handlePassword($input);
+        
+        $user = User::create($input);
+
+        return $user->toArray();
+    }
+
+    /**
+     * Update existing User instance.
+     *
+     * @param int $id
+     * @param array $input
+     * @throws \Symfony\Component\HttpKernel\Exception\HttpException
+     * @return array
+     */
+    public function update($id, $input)
+    {
+        $user = User::find($id);
+        if (empty($user)) {
+            abort(404);
+        }
+
+        $input = $this->handlePassword($input);
+        foreach ($input as $field => $value) {
+            if (isset($user->$field)) {
+                $user->$field = $value;
+            }
+        }
+        $user->save();
+
+        return $user->toArray();
+    }
+
+    /**
+     * Delete user with specified ID.
+     *
+     * @param int $id
+     * @throws \Symfony\Component\HttpKernel\Exception\HttpException
+     * @return bool
+     */
+    public function delete($id)
+    {
+        $user = User::find($id);
+        if (empty($user)) {
+            abort(404);
+        }
+
+        return $user->delete();
     }
 
     /**
@@ -100,5 +174,26 @@ class UserRepository implements DatatableContract, SearchContract, UserContract
         }
 
         return $data;
+    }
+
+    /**
+     * Handles password related fields.
+     * 
+     * @param array
+     * @return array
+     */
+    private function handlePassword($input)
+    {
+        if (isset($input['password_confirm'])) {
+            unset($input['password_confirm']);
+        }
+
+        if (empty($input['password'])) {
+            unset($input['password']);
+        } else {
+            $input['password'] = app('hash')->make($input['password']);
+        }
+
+        return $input;
     }
 }

@@ -5,7 +5,7 @@
             {{ trans('admin.menu.dashboard') }}
         </a>
         <div class="ui simple dropdown item">
-            <i class="user icon"></i>
+            <i class="users icon"></i>
             {{ trans('admin.menu.users') }}
             <i class="dropdown icon"></i>
             <div class="menu">
@@ -13,7 +13,7 @@
                     <i class="list icon"></i>
                     {{ trans('admin.actions.list') }}
                 </a>
-                <a class="item">
+                <a href="{{ route('admin.user.create') }}" class="item">
                     <i class="edit icon"></i>
                     {{ trans('admin.actions.create') }}
                 </a>

@@ -27,25 +27,13 @@ class UserController extends Controller
     }
 
     /**
-     * Index page (list).
+     * List users page.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
         return view('admin.user.index');
-    }
-
-    /**
-     * Create page.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        $user = [];
-
-        return view('admin.user.edit', compact('user'));
     }
 
     /**
@@ -62,7 +50,36 @@ class UserController extends Controller
     }
 
     /**
-     * Edit page.
+     * Create user page.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        $user = $this->users->newInstance();
+
+        $roles = $this->users->roles();
+
+        return view('admin.user.edit', compact('user', 'roles'));
+    }
+
+    /**
+     * Create new user.
+     *
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
+        // @TODO Handle backend validation
+        
+        $user = $this->users->create($request->get('user'));
+
+        return redirect()->route('admin.user.edit', ['id' => $user['id']]);
+    }
+
+    /**
+     * Edit user page.
      *
      * @param int $id
      * @return \Illuminate\Http\Response
@@ -74,5 +91,35 @@ class UserController extends Controller
         $roles = $this->users->roles();
 
         return view('admin.user.edit', compact('user', 'roles'));
+    }
+
+    /**
+     * Update existing user.
+     *
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, $id)
+    {   
+        // @TODO Handle backend validation
+
+        $user = $this->users->update($id, $request->get('user'));
+
+        return redirect()->route('admin.user.edit', ['id' => $user['id']]);
+    }
+
+    /**
+     * Destroy user.
+     *
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy(Request $request, $id)
+    {
+        $user = $this->users->delete($id);
+
+        return redirect()->route('admin.user.index');
     }
 }

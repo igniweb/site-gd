@@ -5,7 +5,7 @@
     <i class="users icon"></i>
     <div class="content">
         {{ trans('admin.user.title') }}
-        <div class="sub header">{{ trans('admin.user.subtitle') }}</div>
+        <div class="sub header">{{ trans('admin.user.index') }}</div>
     </div>
 </h2>
 <table id="users">

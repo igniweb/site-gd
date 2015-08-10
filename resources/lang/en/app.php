@@ -39,11 +39,13 @@ return [
     ],
 
     'user' => [
-        'id'         => 'ID',
-        'role'       => 'Rôle',
-        'email'      => 'E-mail',
-        'first_name' => 'Prénom',
-        'last_name'  => 'Nom',
+        'id'               => 'ID',
+        'role'             => 'Rôle',
+        'email'            => 'E-mail',
+        'first_name'       => 'Prénom',
+        'last_name'        => 'Nom',
+        'password'         => 'Mot de passe',
+        'password_confirm' => 'Confirmation du mot de passe',
     ],
 
 ];

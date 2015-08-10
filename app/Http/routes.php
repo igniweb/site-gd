@@ -4,10 +4,14 @@ $app->get('/', ['as' => 'home', 'uses' => 'HomeController@index']);
 $app->get('search', ['as' => 'search', 'uses' => 'HomeController@search']);
 
 $app->group(['prefix' => 'admin', 'namespace' => 'App\Http\Controllers\Admin'], function ($app) {
+    // REST users
     $app->get('user', ['as' => 'admin.user.index', 'uses' => 'UserController@index']);
     $app->get('user/datatable', ['as' => 'admin.user.datatable', 'uses' => 'UserController@dataTable']);
     $app->get('user/create', ['as' => 'admin.user.create', 'uses' => 'UserController@create']);
-    $app->get('user/{id}', ['as' => 'admin.user.edit', 'uses' => 'UserController@edit']);
+    $app->post('user', ['as' => 'admin.user.store', 'uses' => 'UserController@store']);
+    $app->get('user/{id}/edit', ['as' => 'admin.user.edit', 'uses' => 'UserController@edit']);
+    $app->put('user/{id}', ['as' => 'admin.user.update', 'uses' => 'UserController@update']);
+    $app->delete('user/{id}', ['as' => 'admin.user.destroy', 'uses' => 'UserController@destroy']);
 });
 
 $app->get('sandbox', function () use ($app) {
