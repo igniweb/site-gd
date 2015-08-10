@@ -6,6 +6,7 @@ $app->get('search', ['as' => 'search', 'uses' => 'HomeController@search']);
 $app->group(['prefix' => 'admin', 'namespace' => 'App\Http\Controllers\Admin'], function ($app) {
     $app->get('user', ['as' => 'admin.user.index', 'uses' => 'UserController@index']);
     $app->get('user/datatable', ['as' => 'admin.user.datatable', 'uses' => 'UserController@dataTable']);
+    $app->get('user/create', ['as' => 'admin.user.create', 'uses' => 'UserController@create']);
     $app->get('user/{id}', ['as' => 'admin.user.edit', 'uses' => 'UserController@edit']);
 });
 

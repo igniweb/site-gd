@@ -24,13 +24,17 @@ class UserRepository implements DatatableContract, SearchContract, UserContract
      * Returns user data matching specified ID.
      *
      * @param int $id
-     * @return array|bool
+     * @throws \Symfony\Component\HttpKernel\Exception\HttpException
+     * @return array
      */
     public function byId($id)
     {
         $user = User::find($id);
+        if (empty($user)) {
+            abort(404);
+        }
 
-        return !empty($user) ? $user->toArray() : false;
+        return $user->toArray();
     }
 
     /**

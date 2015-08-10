@@ -37,6 +37,18 @@ class UserController extends Controller
     }
 
     /**
+     * Create page.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        $user = [];
+
+        return view('admin.user.edit', compact('user'));
+    }
+
+    /**
      * Returns data for dataTable.
      *
      * @param \Illuminate\Http\Request $request
@@ -57,6 +69,10 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        return view('admin.user.index');
+        $user = $this->users->byId($id);
+
+        $roles = $this->users->roles();
+
+        return view('admin.user.edit', compact('user', 'roles'));
     }
 }

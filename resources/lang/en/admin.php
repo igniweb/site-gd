@@ -14,7 +14,7 @@ return [
     'menu' => [
         'dashboard' => 'Tableau de bord',
         'users'     => 'Utilisateurs',
-        'search'    => 'Recherche ...',
+        'search'    => 'Rechercher ...',
     ],
 
     'user' => [

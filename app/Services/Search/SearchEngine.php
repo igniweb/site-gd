@@ -17,7 +17,7 @@ class SearchEngine
     {
         $results = [];       
 
-        $searchableRepositories = $this->classesImplementingRepository();
+        $searchableRepositories = $this->repositoriesImplementingSearch();
         foreach ($searchableRepositories as $searchableRepository) {
             $results[str_slug($searchableRepository)] = app($searchableRepository)->search($q);
         }
@@ -25,20 +25,30 @@ class SearchEngine
         return $results;
     }
 
-    private function classesImplementingRepository()
+    /**
+     * Returns repositories implementing Search repository (use 60 minutes cache).
+     *
+     * @return array
+     */
+    private function repositoriesImplementingSearch()
     {
-        /*
-        $searchRepositories = [];
+        $keyCache = 'repositoriesImplementingSearch';
+        $repositories = app('cache')->get($keyCache);
 
-        foreach (get_declared_classes() as $className) {
-            if (in_array('App\Services\Search\Repository', class_implements($className))) {
-                $searchRepositories[] = $className;
+        if ($repositories === null) {
+            $repositories = [];
+
+            foreach (glob(base_path('app/Repositories/Contracts/*.php')) as $contract) {
+                $class = trim(str_replace([base_path(), '.php', 'app', '/'], ['', '', 'App', '\\'], $contract), '\\');
+                if (app($class) instanceof \App\Services\Search\Contracts\Repository) {
+                    $repositories[] = $class;
+                }
             }
-        }
 
-        return $searchRepositories;
-        */
-        return ['App\Repositories\Eloquent\UserRepository'];
+            app('cache')->put($keyCache, $repositories, 60);
+        }
+        
+        return $repositories;
     }
 
 }

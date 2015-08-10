@@ -15,7 +15,8 @@ interface UserRepository
      * Returns user data matching specified ID.
      *
      * @param int $id
-     * @return array|bool
+     * @throws \Symfony\Component\HttpKernel\Exception\HttpException
+     * @return array
      */
     public function byId($id);
 }

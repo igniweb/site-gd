@@ -51,6 +51,9 @@ class Handler extends ExceptionHandler
         if ($e instanceof AuthException) {
             return view('errors.403');
         }
+        if ($e instanceof HttpException) {
+            return view('errors.404');   
+        }
 
         return parent::render($request, $e);
     }
