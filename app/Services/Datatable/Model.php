@@ -2,7 +2,7 @@
 
 namespace App\Services\Datatable;
 
-use DB, StdClass;
+use StdClass;
 
 trait Model
 {
@@ -15,18 +15,18 @@ trait Model
      * @param array $orderColumns
      * @return \StdClass
      */
-    protected function defaultDataTable($query, $input, $searchFields, $orderColumns)
+    protected static function defaultDataTable($query, $input, $searchFields, $orderColumns)
     {
         $default = new StdClass;
 
         // Search
-        $query = $this->searchDataTable($query, $input['search']['value'], $searchFields);
+        $query = static::searchDataTable($query, $input['search']['value'], $searchFields);
         // Order
-        $query = $this->orderDataTable($query, $input['order'], $orderColumns);
+        $query = static::orderDataTable($query, $input['order'], $orderColumns);
         // Paginate
         $default->dataSet = $query->skip($input['start'])->take($input['length'])->get();
         // Total
-        $total = static::select(DB::raw('SELECT FOUND_ROWS() AS `total`'));
+        $total = app('db')->select(app('db')->raw('SELECT FOUND_ROWS() AS `total`'));
 
         // Build dataTable response
         $default->dataTable = new StdClass;
@@ -46,7 +46,7 @@ trait Model
      * @param array $searchFields
      * @return \Illuminate\Database\Query\Builder
      */
-    private function searchDataTable($query, $search, $searchFields)
+    private static function searchDataTable($query, $search, $searchFields)
     {
         $search = trim($search);
         if (!empty($search)) {
@@ -74,7 +74,7 @@ trait Model
      * @param array $orderColumns
      * @return \Illuminate\Database\Query\Builder
      */
-    private function orderDataTable($query, $orders, $orderColumns)
+    private static function orderDataTable($query, $orders, $orderColumns)
     {
         foreach ($orders as $order) {
             $orderFields = [];

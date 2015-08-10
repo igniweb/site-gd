@@ -21,7 +21,6 @@
                 dataType: 'json',
                 delay: 250,
                 data: function (params) {
-console.log(params);
                     return {
                         q: params.term,
                         page: params.page

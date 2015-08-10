@@ -11,6 +11,16 @@ use App\Services\Search\SearchEngine;
 class UserRepository implements UserContract, DatatableRepository, SearchRepository
 {
     /**
+     * Returns key-label roles.
+     *
+     * @return array
+     */
+    public function roles()
+    {
+        return trans('app.roles');
+    }
+
+    /**
      * Returns user data matching specified ID.
      *
      * @param int $id
@@ -32,54 +42,30 @@ class UserRepository implements UserContract, DatatableRepository, SearchReposit
     public function dataTable($input)
     {   // Default query
         $query = User::select(
-            DB::raw('SQL_CALC_FOUND_ROWS `users`.`id`'),
-            'users.ipn',
-            'users.status',
+            app('db')->raw('SQL_CALC_FOUND_ROWS `users`.`id`'),
+            'users.id',
             'users.first_name',
             'users.last_name',
-            'businesses.common_name',
-            'businesses.trading_name',
             'users.email',
-            'users.backend_role',
-            'users.frontend_role',
-            'users.locale'
-        )->withTrashed()->join('businesses', 'users.business_id', '=', 'businesses.id');
-        // Filter locale depending of backend role
-        if ( ! Roles::isSuperAdmin())
-        {
-            $authUser = Auth::user();
-            $query = $query->where('users.locale', '=', $authUser->locale);
-        }
+            'users.role'
+        )->withTrashed();
         // Search
-        $searchFields = ['users.ipn', 'users.email', 'users.first_name', 'users.last_name', 'businesses.common_name', 'businesses.trading_name', 'businesses.code_rrf'];
+        $searchFields = ['users.first_name', 'users.last_name', 'users.email', 'users.role'];
         // Order (important to fit dataTable column order)
-        $orderColumns = ['users.ipn', 'users.status', ['users.first_name', 'users.last_name'], 'users.email', ['businesses.common_name', 'businesses.trading_name'], ['users.backend_role', 'users.frontend_role']];
-        if (Roles::isSuperAdmin())
-        {
-            $orderColumns[] = 'users.locale';
-        }
+        $orderColumns = ['users.id', ['users.first_name', 'users.last_name'], 'users.email', 'users.role'];
 
-        $default = $this->defaultDataTable($query, $input, $searchFields, $orderColumns);
+        $default = User::defaultDataTable($query, $input, $searchFields, $orderColumns);
 
         // Build response data set
         $dataTable = $default->dataTable;
-        foreach ($default->dataSet as $user)
-        {
-            $data = [
-                $user->ipn,
-                trans('sva.statuses.' . $user->status),
+        foreach ($default->dataSet as $user) {
+            $dataTable->data[] = [
+                $user->id,
                 $user->first_name . ' ' . $user->last_name,
                 $user->email,
-                $user->common_name . ' ' . $user->trading_name,
-                Roles::toString($user->toArray()),
+                trans('app.roles.' . $user->role),
+                view('admin.user.actions', compact('user'))->render(),
             ];
-            if (Roles::isSuperAdmin())
-            {
-                $data[] = '<i class="' . $user->locale . ' flag"></i>';
-            }
-            $data[] = view('admin.user.actions', compact('user'))->render();
-
-            $dataTable->data[] = $data;
         }
 
         return $dataTable;

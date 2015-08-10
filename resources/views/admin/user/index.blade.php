@@ -27,5 +27,4 @@
         dataUrl: '{{ route("admin.user.datatable") }}',
         nonOrderableIndexes: 4
     });
-    console.log(App.datatables);
 @stop

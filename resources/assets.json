@@ -12,7 +12,7 @@
         "public/assets/src/js/dataTables.semantic-ui.js",
         "public/assets/src/js/app.js",
         "public/assets/src/js/app.search.js",
-        "public/assets/src/js/app.datatable.js",
+        "public/assets/src/js/app.datatables.js",
         "public/assets/src/js/run.js"
     ],
     "styles": [

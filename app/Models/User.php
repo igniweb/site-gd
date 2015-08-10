@@ -67,14 +67,4 @@ class User extends Model
     {
         return $query->where('role', '=', 'admin');
     }
-
-    /**
-     * Returns key-label roles.
-     *
-     * @return array
-     */
-    public static function roles()
-    {
-        return trans('app.roles');
-    }
 }
