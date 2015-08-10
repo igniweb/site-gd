@@ -19,10 +19,7 @@ class SearchEngine
 
         $searchableRepositories = $this->classesImplementingRepository();
         foreach ($searchableRepositories as $searchableRepository) {
-            $method = $isAjax ? 'searchForSelect2' : 'searchForPage';
-            foreach (app($searchableRepository)->$method($q) as $result) {
-                $results[] = $result;
-            }
+            $results[str_slug($searchableRepository)] = app($searchableRepository)->search($q);
         }
 
         return $results;

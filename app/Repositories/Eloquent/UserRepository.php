@@ -8,7 +8,7 @@ use App\Services\Datatable\Contracts\Repository as DatatableContract;
 use App\Services\Search\Contracts\Repository as SearchContract;
 use App\Services\Search\SearchEngine;
 
-class UserRepository implements UserContract, DatatableContract, SearchContract
+class UserRepository implements DatatableContract, SearchContract, UserContract
 {
     /**
      * Returns key-label roles.
@@ -34,10 +34,10 @@ class UserRepository implements UserContract, DatatableContract, SearchContract
     }
 
     /**
-     * Returns object mapping datatables response (https://www.datatables.net/manual/server-side).
+     * Returns object mapping jQuery Datatables response (https://www.datatables.net/manual/server-side).
      *
      * @param array $input
-     * @return \StdClass
+     * @return array
      */
     public function dataTable($input)
     {   // Default query
@@ -57,9 +57,9 @@ class UserRepository implements UserContract, DatatableContract, SearchContract
         $default = User::defaultDataTable($query, $input, $searchFields, $orderColumns);
 
         // Build response data set
-        $dataTable = $default->dataTable;
-        foreach ($default->dataSet as $user) {
-            $dataTable->data[] = [
+        $dataTable = $default['dataTable'];
+        foreach ($default['dataSet'] as $user) {
+            $dataTable['data'][] = [
                 $user->id,
                 $user->first_name . ' ' . $user->last_name,
                 $user->email,
@@ -72,65 +72,29 @@ class UserRepository implements UserContract, DatatableContract, SearchContract
     }
 
     /**
-     * Returns an array of HTML formatted data for results
-     * corresponding to specified query for search page.
+     * Returns object mapping Semantic UI search response (http://semantic-ui.com/modules/search.html#/usage).
      *
      * @param string $q
      * @return array
      */
-    public function searchForPage($q)
+    public function search($q)
     {
-        $html = [];
+        $data = [
+            'name' => trans('app.search.user'),
+            'results' => [],
+        ];
 
-        $results = $this->searchResults($q);
+        $results = (new User)->search($q, 'first_name', 'asc');
         foreach ($results as $result) {
-            $html[] = '<a href="' . route('admin.user.edit', ['id' => $result->id]) . '">' . $result->first_name . ' ' . $result->last_name . '</a>';
-        }
-
-        return $html;
-    }
-
-    /**
-     * Returns an indexed array of HTML formatted data for results
-     * corresponding to specified query for select2 dropdown.
-     *
-     * @param string $q
-     * @return array
-     */
-    public function searchForSelect2($q)
-    {
-        $data = [];
-
-        $results = $this->searchResults($q);
-        foreach ($results as $result) {
-            $view = [
-                'link' => route('admin.user.edit', ['id' => $result->id]),
+            $data['results'][] = [
+                'title' => $result->first_name . ' ' . $result->last_name,
+                'url' => route('admin.user.edit', ['id' => $result->id]),
                 'image' => app('gravatar')->get($result->email, 48),
-                'header' => $result->first_name . ' ' . $result->last_name,
-                'extra' => trans('app.roles.' . $result->role),
-            ];
-
-            // Do not provide 'id' key, so that Select2 will not allow item to be selected
-            $data[] = [
-                'templateResult' => view('layouts.backend._search_result', $view)->render(),
-                'templateSelection' => $result->first_name . ' ' . $result->last_name,
+                //'price' => null,
+                'description' => trans('app.roles.' . $result->role),
             ];
         }
 
         return $data;
-    }
-
-    /**
-     * Returns a collection of Eloquent models for
-     * results corresponding to specified query.
-     *
-     * @param string $q
-     * @return array
-     */
-    private function searchResults($q)
-    {
-        $model = new User;
-
-        return $model->search($q, 'first_name', 'asc');
     }
 }

@@ -20,8 +20,12 @@
             </div>
         </div>
         <div class="right item">
-            <div class="ui input">
-                <select id="search"></select>
+            <div class="ui category search">
+                <div class="ui icon input">
+                    <input class="prompt" type="text" placeholder="{{ trans('admin.menu.search') }}">
+                    <i class="search icon"></i>
+                </div>
+                <div class="results"></div>
             </div>
         </div>
     </div>

@@ -2,8 +2,6 @@
 
 namespace App\Services\Datatable;
 
-use StdClass;
-
 trait Model
 {
     /**
@@ -13,27 +11,29 @@ trait Model
      * @param array $input
      * @param array $searchFields
      * @param array $orderColumns
-     * @return \StdClass
+     * @return array
      */
     protected static function defaultDataTable($query, $input, $searchFields, $orderColumns)
     {
-        $default = new StdClass;
+        $default = [];
 
         // Search
         $query = static::searchDataTable($query, $input['search']['value'], $searchFields);
         // Order
         $query = static::orderDataTable($query, $input['order'], $orderColumns);
         // Paginate
-        $default->dataSet = $query->skip($input['start'])->take($input['length'])->get();
+        $default['dataSet'] = $query->skip($input['start'])->take($input['length'])->get();
         // Total
-        $total = app('db')->select(app('db')->raw('SELECT FOUND_ROWS() AS `total`'));
+        $data = app('db')->select(app('db')->raw('SELECT FOUND_ROWS() AS `total`'));
+        $total = intval($data[0]->total);
 
         // Build dataTable response
-        $default->dataTable = new StdClass;
-        $default->dataTable->draw = intval($input['draw']);
-        $default->dataTable->recordsTotal = $total[0]->total;
-        $default->dataTable->recordsFiltered = $default->dataTable->recordsTotal;
-        $default->dataTable->data = [];
+        $default['dataTable'] = [
+            'data' => [],
+            'draw' => intval($input['draw']),
+            'recordsTotal' => $total,
+            'recordsFiltered' => $total,
+        ];
 
         return $default;
     }

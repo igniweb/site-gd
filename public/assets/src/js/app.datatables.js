@@ -18,7 +18,7 @@
             } else {
                 $('.dimmer').dimmer('hide');
             }
-        })
+        });
 
         return $table.DataTable({
             language: language,

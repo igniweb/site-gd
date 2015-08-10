@@ -28,6 +28,10 @@ return [
         ],
     ],
 
+    'search' => [
+        'user' => 'Utilisateurs',
+    ],
+
     'roles' => [
         'super_admin' => 'Super-Administrateur',
         'admin'       => 'Administrateur',

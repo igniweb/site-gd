@@ -13,6 +13,10 @@
     {!! app('assets')->scripts() !!}
     <script>
         App.locales = {!! json_encode(trans('app.javascript')) !!};
+        App.search.setup({
+            url: '{{ route("search") }}',
+            minCharacters: 3
+        });
         @yield('scripts')
     </script>
 </body>
