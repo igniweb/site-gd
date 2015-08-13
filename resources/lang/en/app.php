@@ -26,6 +26,11 @@ return [
                 'sSortDescending' => ': activer pour trier la colonne par ordre d&eacute;croissant',
             ],
         ],
+        'form_validation' => [
+            'empty' => 'Champ obligatoire',
+            'email' => 'Adresse e-mail non valide',
+            'match' => 'Ce champ doit correspondre au champ {attribute}',
+        ],
     ],
 
     'search' => [

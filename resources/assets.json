@@ -11,7 +11,7 @@
         "public/assets/src/js/app.js",
         "public/assets/src/js/app.search.js",
         "public/assets/src/js/app.datatables.js",
-        "public/assets/src/js/run.js"
+        "public/assets/src/js/app.form-validation.js"
     ],
     "styles": [
         "public/assets/vendor/semantic-ui/dist/semantic.css",

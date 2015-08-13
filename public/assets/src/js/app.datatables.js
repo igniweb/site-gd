@@ -34,10 +34,6 @@
 
     // --------------------------------------------------------------------------------------------
 
-    module.run = function () {
-        //
-    };
-
     module.setup = function (options) {
         var $table = $('#' + options.table);
         if ($table.length) {

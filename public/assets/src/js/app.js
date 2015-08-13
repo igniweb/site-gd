@@ -11,12 +11,6 @@
     app.ready = function (callable) {
         $(document).ready(callable);
     };
-
-    app.module = function () {
-        $.each($.makeArray(arguments), function (index, module) {
-            window.App[module].run();
-        });
-    };
     
     // --------------------------------------------------------------------------------------------
 

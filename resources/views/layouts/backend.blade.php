@@ -17,6 +17,9 @@
             url: '{{ route("search") }}',
             minCharacters: 3
         });
+        App.form_validation.setup({
+            locales: App.locales.form_validation
+        });
         @yield('scripts')
     </script>
 </body>

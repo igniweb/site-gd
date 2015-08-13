@@ -24,10 +24,6 @@
 
     // --------------------------------------------------------------------------------------------
 
-    module.run = function () {
-        //
-    };
-
     module.setup = function (options) {
         if (typeof options.url !== 'undefined') {
             module.url = _trimTrailingSlash(options.url) + '?q={query}';
